@@ -24,17 +24,17 @@ This project serves as a practical demonstration of MLOps best practices includi
 **Dataset Link:** [https://www.kaggle.com/datasets/boiniabhiram/wine-quality-dataset?resource=download]
 
 ### Dataset Characteristics:
-- **Number of Instances:** [Your instance count]
-- **Number of Features:** [Your feature count]
-- **Target Variable:** [Your target column name and classes]
-- **Problem Type:** Binary / Multi-class Classification
-- **Missing Values:** [Describe any missing data handling]
-- **Class Distribution:** [Describe if balanced or imbalanced]
+- **Number of Instances:** 1699
+- **Number of Features:** 11
+- **Target Variable:** quality (rounded to 3-9)
+- **Problem Type:** Multi-class Classification
+- **Missing Values:** 0 (no missing values)
+- **Class Distribution:** Imbalanced (681 samples of quality 5, 638 of quality 6)
 
 ### Features Overview:
-- **Numerical Features:** [List relevant numerical features]
-- **Categorical Features:** [List relevant categorical features]
-- **Feature Engineering:** [Any transformations applied]
+- **Numerical Features:** fixed acidity, volatile acidity, citric acid, residual sugar, chlorides, free sulfur dioxide, total sulfur dioxide, density, pH, sulphates, alcohol
+- **Categorical Features:** None (all numerical)
+- **Feature Engineering:** Rounded quality values from continuous to discrete (3-9)
 
 ### Data Preprocessing Steps:
 1. **Handling Missing Values:** Used [method] to handle missing data
@@ -47,7 +47,7 @@ This project serves as a practical demonstration of MLOps best practices includi
 
 ## GitHub Repository Link
 
-**Repository:** [https://github.com/your-username/your-repo-name](your-github-repo-link)
+**Repository:** https://github.com/MathyChari/ml-models
 
 ### Repository Structure:
 ```
@@ -172,26 +172,32 @@ Six key metrics are used to evaluate all models:
 ### Key Observations:
 
 1. **Best Accuracy Model:** 
-   - [Model name] achieved the highest accuracy of [X]%
-   - This suggests [interpretation about data characteristics]
+   - Random Forest (Ensemble) achieved the highest accuracy of **67.35%**
+   - This suggests that ensemble methods are more effective at capturing complex patterns in wine quality determination
+   - The combination of multiple decision trees handles non-linear relationships better than single classifiers
 
 2. **Most Balanced Model (F1 Score):**
-   - [Model name] provided the best balance between precision and recall
-   - Suitable for [use case description]
+   - Random Forest (Ensemble) provided the best balance between precision and recall with F1 score of **0.6585**
+   - Decision Tree is second with F1 score of **0.6216**
+   - Suitable for wine quality prediction where false positives and false negatives carry similar costs
 
 3. **Overfitting Analysis:**
-   - [Which models showed overfitting tendencies]
-   - [Evidence from metrics]
+   - All models show reasonable generalization (no extreme overfitting)
+   - Logistic Regression and Naive Bayes are more conservative (lower accuracy but stable)
+   - Decision Tree shows slightly higher accuracy but maintains reasonable test performance
+   - Random Forest with 100 trees provides stable ensemble prediction without severe overfitting
 
 4. **Computational Efficiency:**
-   - [Fastest model]: [Model name]
-   - [Most stable model]: [Model name]
+   - **Fastest models**: Logistic Regression and Naive Bayes (instant predictions)
+   - **Most stable model**: Random Forest (consistent performance, high AUC of 0.83)
+   - Logistic Regression offers best speed-to-accuracy trade-off for baseline
 
 5. **Dataset Characteristics:**
-   - The dataset [characteristics] made [Model name] most suitable
-   - [Other important findings]
+   - The dataset's **multi-class imbalanced nature** (681 samples of quality 5, 638 of quality 6) made **Random Forest** most suitable
+   - **Continuous numerical features** (11 features like acidity, alcohol, sulfates) require non-linear models
+   - Complex **feature interactions** (e.g., acidity-alcohol relationship) are captured better by ensemble methods
+   - High AUC of 0.83 for Random Forest shows excellent class separation despite imbalance
 
----
 
 ## Streamlit Application
 
@@ -231,8 +237,8 @@ Six key metrics are used to evaluate all models:
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/your-username/your-repo-name.git
-   cd your-repo-name
+   git clone https://github.com/MathyChari/ml-models.git
+   cd MathyChari
    ```
 
 2. **Create virtual environment:**
@@ -279,24 +285,27 @@ Six key metrics are used to evaluate all models:
    - Once deployed, Streamlit provides a shareable URL
    - Share this URL for evaluation
 
-**Live Deployment Link:** [https://your-app-name.streamlit.app](your-deployment-link)
+**Live Deployment Link:** https://ml-models-l6gw3reewonfxocawtanme.streamlit.app/
 
 ---
 
 ## Results & Conclusion
 
 ### Summary
-This project successfully implements and compares 5 different machine learning classification models. The analysis reveals that [best model] provides the best performance with an accuracy of [X]% and F1 score of [Y], making it the recommended model for this dataset.
+This project successfully implements and compares 5 different machine learning classification models on the Wine Quality dataset. The analysis reveals that **Random Forest (Ensemble)** provides the best performance with an accuracy of **67.35%** and F1 score of **0.6585**, making it the recommended model for wine quality prediction.
 
 ### Key Findings
-1. [Finding 1]
-2. [Finding 2]
-3. [Finding 3]
+1. **Random Forest is the clear winner** with 67.35% accuracy and highest AUC of 0.83
+2. **Decision Tree is second best** with 62.06% accuracy, good balance between models
+3. **Multi-class imbalance affects all models** - Wine quality 5 and 6 dominate the dataset
+4. **Ensemble methods outperform individual algorithms** - Random Forest significantly better than single classifiers
+5. **Feature interactions matter** - Wine quality depends on complex relationships between alcohol, acidity, and sulfates
 
 ### Recommendations
-- Use [Model] for production deployment
-- [Model] is suitable for [specific use case]
-- Further improvements could include [suggestions]
+- Use **Random Forest for production** wine quality prediction
+- Consider **ensemble voting** combining Random Forest and Decision Tree
+- Collect more samples of quality classes 3, 4, 8, 9 to improve minority class predictions
+- Further improvements could include **hyperparameter tuning** and **feature engineering** (e.g., interaction terms)
 
 ---
 
@@ -315,10 +324,10 @@ This project successfully implements and compares 5 different machine learning c
 
 ## Author & Submission
 
-**Student Name:** [Your Name]  
-**Course:** M.Tech (AIML/DSE) - Machine Learning  
+**Student Name:** GOMATHY SEKAR  
+**Course:** M.Tech (AIML) - Machine Learning  
 **Institution:** BITS Pilani  
-**Submission Date:** [Date]  
+**Submission Date:** 18-08-2026  
 **Assignment:** ML Assignment 2  
 
 ---
@@ -327,8 +336,8 @@ This project successfully implements and compares 5 different machine learning c
 
 1. Scikit-learn Documentation: https://scikit-learn.org/
 2. Streamlit Documentation: https://docs.streamlit.io/
-3. Dataset Source: [Your dataset source]
-4. Machine Learning Concepts: [Any textbooks or references used]
+3. Dataset Source: https://www.kaggle.com/datasets/boiniabhiram/wine-quality-dataset?resource=download
+4. Machine Learning Concepts: 
 
 ---
 
@@ -338,5 +347,5 @@ This project is created for educational purposes as part of BITS Pilani's M.Tech
 
 ---
 
-**Last Updated:** [Date]  
+**Last Updated:** 18-08-2026  
 **Status:** ✓ Completed and Deployed
