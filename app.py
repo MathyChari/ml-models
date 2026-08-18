@@ -91,7 +91,7 @@ if st.session_state.data is not None:
                 y = st.session_state.data[target_col]
                 
                 # Round quality to nearest integer (convert continuous to discrete)
-                y = y.round().astype(int)
+                y = y.round().astype(int) 
                 
                 # Encode categorical variables
                 label_encoders = {}
