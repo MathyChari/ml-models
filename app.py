@@ -90,6 +90,9 @@ if st.session_state.data is not None:
                 X = st.session_state.data.drop(columns=[target_col])
                 y = st.session_state.data[target_col]
                 
+                # Round quality to nearest integer (convert continuous to discrete)
+                y = y.round().astype(int)
+                
                 # Encode categorical variables
                 label_encoders = {}
                 for col in X.select_dtypes(include=['object']).columns:
